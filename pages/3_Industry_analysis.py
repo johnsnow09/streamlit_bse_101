@@ -20,7 +20,7 @@ st.set_page_config(page_title="Analyse & Compare Stocks by Industry",
 # @st.cache
 # @st.cache_data
 def get_data():
-    df = pl.scan_parquet('./df_bse_compiled_3.parquet')
+    df = pl.scan_parquet('../df_bse_compiled_3.parquet')
     
     # polars automatically took it as date so need for casting
     # df['date'] = pd.to_datetime(df['date'])

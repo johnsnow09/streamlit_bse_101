@@ -20,8 +20,8 @@ st.set_page_config(page_title="Streamlit_101",
 # @st.cache
 # @st.cache_data
 def get_data():
-    df = pl.scan_parquet('../df_bse_compiled_3.parquet')
-    # df = pl.scan_parquet('../df_bse_compiled_3.parquet')
+    df = pl.scan_parquet('df_bse_compiled_3.parquet')
+    # df = pl.scan_parquet('df_bse_compiled_3.parquet')
     
     # polars automatically took it as date so need for casting
     # df['date'] = pd.to_datetime(df['date'])
@@ -84,23 +84,23 @@ lifetime_low = float(df_selected['CLOSE'].min())
 no_1,no_2,no_3,no_4,no_5 = st.columns(5, gap="large")
 
 with no_1:
-    st.image('./Icons/kick-me.png', use_column_width='Auto')
+    st.image('Icons/kick-me.png', use_column_width='Auto')
     st.metric(label='Sector',value=Sector_Name)
 
 with no_2:
-    st.image('./Icons/banana.png', use_column_width='Auto')
+    st.image('Icons/banana.png', use_column_width='Auto')
     st.metric(label='Industry',value=Industry_Name)
 
 with no_3:
-    st.image('./Icons/ninja.png', use_column_width='Auto')
+    st.image('Icons/ninja.png', use_column_width='Auto')
     st.metric(label='Industry New',value=Industry_Name_New)
 
 with no_4:
-    st.image('./Icons/weight.png', use_column_width='Auto')
+    st.image('Icons/weight.png', use_column_width='Auto')
     st.metric(label='Highest Price',value=numerize(lifetime_high)) 
 
 with no_5:
-    st.image('./Icons/glasses.png', use_column_width='Auto')
+    st.image('Icons/glasses.png', use_column_width='Auto')
     st.metric(label='Lowest Price',value=numerize(lifetime_low))
 
 

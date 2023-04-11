@@ -42,7 +42,7 @@ with header_mid:
 with st.sidebar:
     Security_Type = st.multiselect(label="Select Sector",
                                      options=df.lazy().select(pl.col('Sector Name')
-                                                              ).unique().collect().to_series().to_list(),
+                                                              ).unique().collect(streaming=True).to_series().to_list(),
                                      default= 'Financial Services',
                                      max_selections=1)
     
@@ -50,7 +50,7 @@ with st.sidebar:
     ########## Security Group Filteration & List Below ########## 
 
     Security_Group_List = df.lazy().filter(pl.col('Sector Name').is_in(Security_Type)).select(
-                                                pl.col('Industry')).unique().collect().to_series().to_list()
+                                                pl.col('Industry')).unique().collect(streaming=True).to_series().to_list()
 
     Security_Group = st.multiselect(label="Select Industry type",
                                      options=Security_Group_List,
@@ -67,7 +67,7 @@ with st.sidebar:
     Security_Name_List = df.lazy().filter((pl.col('Sector Name').is_in(Security_Type)) & 
                                                 (pl.col('Industry').is_in(Security_Group))
                                                 ).select(
-                                                pl.col('SC_NAME')).unique().collect().to_series().to_list()
+                                                pl.col('SC_NAME')).unique().collect(streaming=True).to_series().to_list()
     
     Security_Name = st.multiselect(label="Select Security Name",
                                     options=Security_Name_List,
@@ -79,7 +79,7 @@ with st.sidebar:
 
 df_selected = df.lazy().filter( 
                        (pl.col('SC_NAME').is_in(Security_Name))
-                       ).sort(['SC_NAME','date']).collect()
+                       ).sort(['SC_NAME','date']).collect(streaming=True)
 
 # Sector_Name = df_selected.select(pl.col('Sector Name')).unique().item()
 # Industry_Name = df_selected.select(pl.col('Industry')).unique().item()
